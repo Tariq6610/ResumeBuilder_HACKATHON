@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume_Tariq-Syed</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="formContainer">
+        <h1 class="heading">Create Resume</h1>
+        <fieldset>
+            <legend >BIO</legend>
+            <div class="inp">
+                <label for="name">Name:</label>
+                <input  type="text" name="name"  id="name">
+            </div>
+            <div class="inp">
+                <label for="email">Email:</label>
+                <input type="text" name="email"  id="email">
+            </div>
+            <div class="inp">
+                <label for="Phone">Phone:</label>
+                 <input type="text" name="Phone"  id="phone">
+            </div>
+            <div class="inp">
+                <label for="Address">Address:</label>
+                <input type="text" name="Address" id="address">
+            </div>
+            <div class="inp">
+                <label for="DateOfBirth">Date Of Birth:</label>
+                <input type="text" name="DateOfBirth" id="DOB">
+            </div>
+            <div class="inp">
+                <label for="Objective">image :</label>
+                <input type="file" name="" id="image" accept="image/*">
+            </div>
+        </fieldset>
+       
+        <!-- Education -->
+        <div>
+            <fieldset >
+                <legend>Education</legend>
+                <div class="EducationfeildWrapper">
+                    <div class="fieldWrap educationField" id="educationField">
+                        <div class="inp">
+                            <label for="degree">Degree : </label>
+                            <input type="text" name="degree" id="degree">
+                        </div>
+                        <div class="inp">
+                            <label for="institute">Institute : </label>
+                            <input type="text" name="institute" id="institute">
+                        </div>
+                        <div class="inp">
+                            <label for="YearOfPassing">Year Of Passing : </label>
+                            <input type="text" name="YearOfPassing" id="YearOfPassing">
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <div>
+                <button class="btn" id="addMoreEducation">Add more</button>
+            </div>        
+        </div>
+       
+        <!-- Technical & Professional Courses -->
+        <div>
+            <fieldset >
+                <legend>Technical & Professional Courses</legend>
+                <div class="TechnicalfeildWrapper">
+                    <div class="fieldWrap TechnicalField" id="TechnicalField">
+                        <div class="inp">
+                            <label for="degree">Degree : </label>
+                            <input type="text" name="degree" id="Technical">
+                        </div>
+                        <div class="inp">
+                            <label for="institute">Institute : </label>
+                            <input type="text" name="institute" id="institue">
+                        </div>
+                        <div class="inp">
+                            <label for="YearOfPassing">Year Of Passing : </label>
+                            <input type="text" name="YearOfPassing" id="YearOfPassing">
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <div>
+                <button class="btn" id="addMoreCources">Add more</button>
+            </div>        
+        </div>
+
+
+        <!-- Projects -->
+        <div>
+            <fieldset >
+                <legend>Projects and Activies</legend>
+                <div class="ProjectsfeildWrapper">
+                    <div class="fieldWrap ProjectsField" id="ProjectsField">
+                        <div class="inp">
+                            <label for="projectName">Project Name : </label>
+                            <input type="text" name="projectName" id="projectName">
+                        </div>
+                        <div class="inp">
+                            <label for="project">Description : </label>
+                            <textarea name="project" id="project" ></textarea>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <div>
+                <button class="btn" id="addMoreProjects">Add more</button>
+            </div>        
+        </div>
+        <div>
+            <fieldset >
+                <legend>Skills</legend>
+                <div class="skillsWrapper">
+                    <div class="fieldWrap skillsField" id="skillsField">
+                        <div class="inp">
+                            <label for="skills">Skill</label>
+                            <input type="text" name="skills" id="skills">
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <div>
+                <button class="btn" id="addMoreSkills">Add more</button>
+            </div>        
+        </div>
+
+        <div id="addButton">
+            <button  id="addBtn">add</button>
+        </div>
+
+    </div>
+     
+
+    <div id="btnWrap">
+        <button id="clear">Clear</button>
+        <button  id="toggleBtn" onclick="toggle()"><i class='fa-solid fa-toggle-off'></i></button>
+
+    </div> 
+
+
+    
+    <!--CV template -->
+    <div class="heading"><h1>Resume Template</h1></div>
+    <div class="container dark cv">
+        <div class="firstInnerCont">
+            <div class="img">
+                <img src="./img.jpg" id="cvDP" alt="image">
+            </div>
+            <div class="bio">
+                <h1 id="cvName">Tariq Syed</h1>
+                <p><i  class="fa-solid fa-square-envelope"></i><span style="margin-inline: 20px;">Email</span><span id="cvEmail">tariqsyed6610gmail.com</span></p>
+
+                <p><i class="fa-solid fa-square-phone"></i><span style="margin-inline: 20px;">Phone</span><span id="cvPhone">123-456789</span></p>
+
+                <p><i class="fa-regular fa-address-book"></i><span style="margin-inline: 20px;">Address</span><span id="cvAddress">Landhi, Karachi</span></p>
+
+                <p><i class="fa-regular fa-calendar-days"></i><span style="margin-inline: 20px;">Date of   Birth</span><span id="cvDOB">27-march-1999</span></p>
+
+               <p><i class="fa-solid fa-circle-info"></i><span style="margin-inline: 20px;">Objective</span><p style="margin: -5px 0px 0px 50px;">A detail-oriented and innovative programmer.  skilled in languages such as JavaScript, TypeScript. Passionate about solving complex problems and creating efficient, scalable code for both front-end and back-end systems. Seeking an opportunity to contribute to a dynamic development team and utilize my expertise</p></p> 
+            </div>
+        </div>
+        <h1>Skills</h1>
+        <div class="skills">
+            <!-- <div>HTML</div>
+            <div>CSS</div>
+            <div>JavaScript</div>
+            <div>TypeScript</div>
+            <div>React</div>
+            <div>Next Js</div>
+            <div>Fiebase</div>
+            <div>Bootstrap</div>
+            <div>Tailwind</div> -->
+        </div>
+
+
+        <div class="secondInnerCont">
+            <div class="col1">
+                <h1>Education</h1>
+                <div class="education">
+                    <!-- <h3>Bachelor of Commerce (B.Com)</h3>
+                    <i>University of Karachi</i>
+                    <p>Year of Completion: 2021</p>
+
+                    <h3>Intermediate (FSC) in Engineering</h3>
+                    <i>Aisha Bawani college</i>
+                    <p>Year of Completion: 2018</p> -->
+                </div>
+                <h1>Technical & Professional Courses</h1>
+                <div class="cvCources">  
+                    <!-- <h3>CS50: Introduction to Computer Science</h3>
+                    <i>Harvard University (Online Course)</i>
+                    <p>Year : 2021</p>
+
+                    <h3>MERN Stack Development (Ongoing)</h3>
+                    <i>SMIT (Saylani Mass IT Training)</i>
+                    <p>Year of Admission: 2023</p>
+
+                    <h3>Cloud Applied and Generative AI (Ongoing)</h3>
+                    <i>Governor’s Initiative</i>
+                    <p>Year of Admission: 2024</p> -->
+                </div>
+            </div>
+            <div class="col2">
+                <h1>Projects and Activies</h1>
+                <ul class="cvProjects">
+                    <!-- <li class="activities"><span>Todo App -- </span>Developed multiple task management apps with full CRUD functionality.</li>
+
+                    <li class="activities"><span>Weather App -- </span>Built a weather forecast app that fetches real-time data from an API and displays current weather conditions.</li>
+
+                    <li class="activities"><span>Quiz App -- </span>DCreated an interactive quiz application with dynamic question generation and result tracking.</li>
+
+                    <li class="activities"><span>News App -- </span> Designed a news aggregation app that pulls in the latest news from various sources using APIs.</li>
+
+                    <li class="activities"><span>Digital Clock -- </span>Developed a real-time digital clock using React and JavaScript.</li>
+
+                    <li class="activities"><span>Foodpanda Clone  -- </span> Created a fully functional clone of the Foodpanda app with features such as menu display, cart system, and user authentication.</li>
+                
+                    <li class="activities"><span>CLI ATM -- </span>Built a command-line interface ATM system with basic banking functions like balance check, deposit, and withdrawal.</li>
+
+                    <li class="activities"><span>CLI Guess Game -- </span>Developed a command-line number guessing game with a simple algorithm for feedback.</li>
+
+                    <li class="activities"><span>CLI Calculator -- </span>Created a basic calculator in a command-line interface to perform simple arithmetic operations.</li>
+
+                    <li class="activities">Achieved 99th Percentile in the first quarter of the course, demonstrating high proficiency and dedication.</li> -->
+                </ul>
+            </div>
+        </div>
+        <hr>
+        <div class="socials">
+            <h3 style="text-align: center;">Connect with me :  </h3>
+            <div>
+                <span><a href="https://www.linkedin.com/in/tariq-syed-788940289/"><i style="font-size: 30px;" class="fa-brands fa-linkedin"></i></a></span>
+
+                <span><a href="https://github.com/Tariq6610"><i  style="font-size: 30px;"  class="fa-brands fa-github"></i></a></span>
+
+                <span><a href="https://www.facebook.com/tariq.syed.393/"><i style="font-size: 30px;" class="fa-brands fa-facebook"></i></a></span>
+            </div>
+           
+        </div>
+    </div>
+
+   
+    <script src="script.js"></script>
+</body>
+</html>
