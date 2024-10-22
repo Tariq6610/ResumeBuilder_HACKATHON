@@ -393,7 +393,7 @@ function getData(){
 
     }else{
         cv.innerHTML = `
-             <div class="firstInnerCont">
+            <div class="firstInnerCont"> 
             <div class="img">
                 <img src="./img.jpg" id="cvDP" alt="image">
             </div>
@@ -426,54 +426,56 @@ function getData(){
 
         <div class="secondInnerCont">
             <div class="col1">
-                <h1>Education</h1>
-                <div class="education">
-                    <h3>Bachelor of Commerce (B.Com)</h3>
-                    <i>University of Karachi</i>
-                    <p>Year of Completion: 2021</p>
-
-                    <h3>Intermediate (FSC) in Engineering</h3>
-                    <i>Aisha Bawani college</i>
-                    <p>Year of Completion: 2018</p>
+                <div class="eduWraper">
+                    <div>
+                        <h1>Education</h1>
+                        <div class="education">
+                            <h3>Bachelor of Commerce (B.Com)</h3>
+                            <i>University of Karachi</i>
+                            <p>Year of Completion: 2021</p>
+                            <h3>Intermediate (FSC) in Engineering</h3>
+                            <i>Aisha Bawani college</i>
+                            <p>Year of Completion: 2018</p>
+                        </div>
+                    </div>
                 </div>
-                <h1>Technical & Professional Courses</h1>
-                <div class="cvCources">  
-                    <h3>CS50: Introduction to Computer Science</h3>
-                    <i>Harvard University (Online Course)</i>
-                    <p>Year : 2021</p>
+                <div class="techWraper">
 
-                    <h3>MERN Stack Development (Ongoing)</h3>
-                    <i>SMIT (Saylani Mass IT Training)</i>
-                    <p>Year of Admission: 2023</p>
-
-                    <h3>Cloud Applied and Generative AI (Ongoing)</h3>
-                    <i>Governor’s Initiative</i>
-                    <p>Year of Admission: 2024</p>
+                    <div>
+                        <h1>Technical & Professional Courses</h1>
+                        <div class="cvCources">
+                            <h3>CS50: Introduction to Computer Science</h3>
+                            <i>Harvard University (Online Course)</i>
+                            <p>Year : 2021</p>
+                            <h3>MERN Stack Development (Ongoing)</h3>
+                            <i>SMIT (Saylani Mass IT Training)</i>
+                            <p>Year of Admission: 2023</p>
+                            <h3>Cloud Applied and Generative AI (Ongoing)</h3>
+                            <i>Governor’s Initiative</i>
+                            <p>Year of Admission: 2024</p>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col2">
-                <h1>Projects and Activies</h1>
-                <ul class="cvProjects">
-                    <li class="activities"><span>Todo App -- </span>Developed multiple task management apps with full CRUD functionality.</li>
-
-                    <li class="activities"><span>Weather App -- </span>Built a weather forecast app that fetches real-time data from an API and displays current weather conditions.</li>
-
-                    <li class="activities"><span>Quiz App -- </span>DCreated an interactive quiz application with dynamic question generation and result tracking.</li>
-
-                    <li class="activities"><span>News App -- </span> Designed a news aggregation app that pulls in the latest news from various sources using APIs.</li>
-
-                    <li class="activities"><span>Digital Clock -- </span>Developed a real-time digital clock using React and JavaScript.</li>
-
-                    <li class="activities"><span>Foodpanda Clone  -- </span> Created a fully functional clone of the Foodpanda app with features such as menu display, cart system, and user authentication.</li>
-                
-                    <li class="activities"><span>CLI ATM -- </span>Built a command-line interface ATM system with basic banking functions like balance check, deposit, and withdrawal.</li>
-
-                    <li class="activities"><span>CLI Guess Game -- </span>Developed a command-line number guessing game with a simple algorithm for feedback.</li>
-
-                    <li class="activities"><span>CLI Calculator -- </span>Created a basic calculator in a command-line interface to perform simple arithmetic operations.</li>
-
-                    <li class="activities">Achieved 99th Percentile in the first quarter of the course, demonstrating high proficiency and dedication.</li>
-                </ul>
+                <div class="projWraper">
+                    <div class="proj">
+                        <h1>Projects and Activies</h1>
+                        <ul class="cvProjects">
+                            <li class="activities"><span>Todo App -- </span>Developed multiple task management apps with full CRUD functionality.</li>
+                            <li class="activities"><span>Weather App -- </span>Built a weather forecast app that fetches real-time data from an API and displays current weather conditions.</li>
+                            <li class="activities"><span>Quiz App -- </span>DCreated an interactive quiz application with dynamic question generation and result tracking.</li>
+                            <li class="activities"><span>News App -- </span> Designed a news aggregation app that pulls in the latest news from various sources using APIs.</li>
+                            <li class="activities"><span>Digital Clock -- </span>Developed a real-time digital clock using React and JavaScript.</li>
+                            <li class="activities"><span>Foodpanda Clone  -- </span> Created a fully functional clone of the Foodpanda app with features such as menu display, cart system, and user authentication.</li>
+                        
+                            <li class="activities"><span>CLI ATM -- </span>Built a command-line interface ATM system with basic banking functions like balance check, deposit, and withdrawal.</li>
+                            <li class="activities"><span>CLI Guess Game -- </span>Developed a command-line number guessing game with a simple algorithm for feedback.</li>
+                            <li class="activities"><span>CLI Calculator -- </span>Created a basic calculator in a command-line interface to perform simple arithmetic operations.</li>
+                            <li class="activities">Achieved 99th Percentile in the first quarter of the course, demonstrating high proficiency and dedication.</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
         <hr>
@@ -487,7 +489,7 @@ function getData(){
                 <span><a href="https://www.facebook.com/tariq.syed.393/"><i style="font-size: 30px;" class="fa-brands fa-facebook"></i></a></span>
             </div>
            
-        </div>
+        </div> 
         `
     }
 
@@ -553,7 +555,7 @@ downloadBtn && downloadBtn.addEventListener("click",()=>{
 
     shareBtn && shareBtn.addEventListener("click", async () => {
         // Define the base URL
-        const url = `http://127.0.0.1:5500/index.html?`;
+        const url = `http://127.0.0.1:5501/index.html?`;
         
         // Get the user data from sessionStorage
         const userdata = sessionStorage.getItem("user");
