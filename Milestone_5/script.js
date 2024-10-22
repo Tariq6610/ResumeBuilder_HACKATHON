@@ -300,7 +300,7 @@ shareBtn && shareBtn.addEventListener("click", function () { return __awaiter(_t
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                url = "http://127.0.0.1:5501/index.html?";
+                url = "https://vercel.live/link/resume-builder-hackathon-v2bc-upto-milestone-5.vercel.app?via=project-dashboard-alias-list&p=1&page=/?";
                 userdata = sessionStorage.getItem("user");
                 data = userdata ? JSON.parse(userdata) : {};
                 searchParams = new URLSearchParams();
