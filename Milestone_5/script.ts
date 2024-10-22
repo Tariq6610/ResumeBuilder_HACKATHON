@@ -555,7 +555,7 @@ downloadBtn && downloadBtn.addEventListener("click",()=>{
 
     shareBtn && shareBtn.addEventListener("click", async () => {
         // Define the base URL
-        const url = `http://127.0.0.1:5501/index.html?`;
+        const url = `https://vercel.live/link/resume-builder-hackathon-v2bc-upto-milestone-5.vercel.app?via=project-dashboard-alias-list&p=1&page=/?`;
         
         // Get the user data from sessionStorage
         const userdata = sessionStorage.getItem("user");
