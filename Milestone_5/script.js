@@ -202,17 +202,17 @@ addBtn.addEventListener("click", function () {
     uploadData();
     location.reload();
 });
+var cvName = document.getElementById("cvName");
+var cvEmail = document.getElementById("cvEmail");
+var cvPhone = document.getElementById("cvPhone");
+var cvDP = document.getElementById("cvDP");
+var cvAddress = document.getElementById("cvAddress");
+var cvDOB = document.getElementById("cvDOB");
+var cvSkills = document.querySelector(".skills");
+var cvEducation = document.querySelector(".education");
+var cvCources = document.querySelector(".cvCources");
+var cvProjects = document.querySelector(".cvProjects");
 function getData() {
-    var cvName = document.getElementById("cvName");
-    var cvEmail = document.getElementById("cvEmail");
-    var cvPhone = document.getElementById("cvPhone");
-    var cvDP = document.getElementById("cvDP");
-    var cvAddress = document.getElementById("cvAddress");
-    var cvDOB = document.getElementById("cvDOB");
-    var cvSkills = document.querySelector(".skills");
-    var cvEducation = document.querySelector(".education");
-    var cvCources = document.querySelector(".cvCources");
-    var cvProjects = document.querySelector(".cvProjects");
     var userdata = sessionStorage.getItem("user");
     if (userdata && cvName && cvEmail && cvPhone && cvDP && cvAddress && cvDOB && cvSkills && cvEducation && cvCources && cvProjects) {
         var data = JSON.parse(userdata);
@@ -327,13 +327,47 @@ var handleParams = function () {
     // Parse the current URL's query string
     var searchParams = new URLSearchParams(window.location.search);
     // Retrieve the 'user' query parameter, which is a JSON string
-    var userDataString = searchParams.get('user');
+    var userDataString = searchParams && searchParams.get('user');
     if (userDataString) {
         btnWrap && btnWrap.classList.toggle("hide");
         form && form.classList.toggle("hide");
         heading && heading.classList.toggle("hide");
         var parsedUserData = JSON.parse(decodeURIComponent(userDataString));
         console.log("search Params data", parsedUserData);
+        //Add data to the page
+        if (parsedUserData && cvName && cvEmail && cvPhone && cvDP && cvAddress && cvDOB && cvSkills && cvEducation && cvCources && cvProjects) {
+            cvName.innerHTML = parsedUserData.name;
+            cvEmail.innerHTML = parsedUserData.email;
+            cvPhone.innerHTML = parsedUserData.phone;
+            cvDP.src = parsedUserData.image;
+            cvAddress.innerHTML = parsedUserData.address;
+            cvDOB.innerHTML = parsedUserData.DateOfBirth;
+            // Skill
+            parsedUserData.skill.forEach(function (val) {
+                cvSkills.innerHTML +=
+                    "<div>".concat(val.skill, " </div>");
+            });
+            // Education
+            parsedUserData.Education.forEach(function (val) {
+                cvEducation.innerHTML +=
+                    "\n                 <h3>".concat(val.degree, " </h3>\n                 <i>").concat(val.institute, " </i>\n                 <p>Year of Completion:").concat(val.YearOfPassing, " </p>\n                ");
+            });
+            //Cources
+            parsedUserData.Cources
+                .forEach(function (val) {
+                cvCources.innerHTML +=
+                    "\n                 <h3>".concat(val.degree, " </h3>\n                 <i>").concat(val.institute, " </i>\n                 <p>Year of Completion:").concat(val.YearOfPassing, " </p>\n                ");
+            });
+            //Projects
+            parsedUserData.Projects
+                .forEach(function (val) {
+                cvProjects.innerHTML +=
+                    "\n                 <li class=\"activities\"><span>".concat(val.projectName, "  -- </span><span>").concat(val.description, " </span></li>\n                ");
+            });
+            // editToggle && editToggle.classList.toggle("hide")
+            // downloadBtn && downloadBtn.classList.toggle("hide")
+            // shareBtn && shareBtn.classList.toggle("hide")
+        }
     }
 };
 handleParams();

@@ -324,22 +324,27 @@ addBtn.addEventListener("click",()=>{
     location.reload(); 
 })
 
+const cvName = document.getElementById("cvName") as HTMLHeadingElement | null;
+const cvEmail = document.getElementById("cvEmail") as HTMLSpanElement | null ;
+const cvPhone = document.getElementById("cvPhone") as HTMLSpanElement | null ;
+const cvDP = document.getElementById("cvDP") as HTMLImageElement | null ;
+const cvAddress = document.getElementById("cvAddress") as HTMLSpanElement | null ;
+const cvDOB = document.getElementById("cvDOB") as HTMLSpanElement | null ;
+const cvSkills = document.querySelector(".skills") as HTMLDivElement | null;
+const cvEducation = document.querySelector(".education") as HTMLDivElement | null;
+const cvCources = document.querySelector(".cvCources") as HTMLDivElement | null;
+const cvProjects = document.querySelector(".cvProjects") as HTMLUListElement | null;
+
+// Parse the current URL's query string
+const searchParams = new URLSearchParams(window.location.search);
+    
+ // Retrieve the 'user' query parameter, which is a JSON string
+const userDataString = searchParams && searchParams.get('user');
+
 function getData(){
-    const cvName = document.getElementById("cvName") as HTMLHeadingElement | null;
-    const cvEmail = document.getElementById("cvEmail") as HTMLSpanElement | null ;
-    const cvPhone = document.getElementById("cvPhone") as HTMLSpanElement | null ;
-    const cvDP = document.getElementById("cvDP") as HTMLImageElement | null ;
-    const cvAddress = document.getElementById("cvAddress") as HTMLSpanElement | null ;
-    const cvDOB = document.getElementById("cvDOB") as HTMLSpanElement | null ;
-    const cvSkills = document.querySelector(".skills") as HTMLDivElement | null;
-    const cvEducation = document.querySelector(".education") as HTMLDivElement | null;
-    const cvCources = document.querySelector(".cvCources") as HTMLDivElement | null;
-    const cvProjects = document.querySelector(".cvProjects") as HTMLUListElement | null;
-    
-    
     
     const userdata = sessionStorage.getItem("user")
-    if(userdata && cvName && cvEmail && cvPhone && cvDP && cvAddress && cvDOB && cvSkills  && cvEducation && cvCources  && cvProjects){
+    if(!userDataString &&userdata && cvName && cvEmail && cvPhone && cvDP && cvAddress && cvDOB && cvSkills  && cvEducation && cvCources  && cvProjects){
         const data = JSON.parse(userdata);
         console.log("session storage--->",data);
         
@@ -391,7 +396,7 @@ function getData(){
         shareBtn && shareBtn.classList.toggle("hide")
 
 
-    }else{
+    }else if(!userdata && !userDataString){
         cv.innerHTML = `
             <div class="firstInnerCont"> 
             <div class="img">
@@ -583,6 +588,7 @@ downloadBtn && downloadBtn.addEventListener("click",()=>{
         btnWrap && btnWrap.classList.toggle("hide")
         form && form.classList.toggle("hide")
         heading && heading.classList.toggle("hide")
+        
     });
 
     
@@ -591,7 +597,7 @@ downloadBtn && downloadBtn.addEventListener("click",()=>{
         const searchParams = new URLSearchParams(window.location.search);
     
         // Retrieve the 'user' query parameter, which is a JSON string
-        const userDataString = searchParams.get('user');
+        const userDataString = searchParams && searchParams.get('user');
 
         if (userDataString) {
             btnWrap && btnWrap.classList.toggle("hide")
@@ -599,6 +605,61 @@ downloadBtn && downloadBtn.addEventListener("click",()=>{
             heading && heading.classList.toggle("hide")
             const parsedUserData = JSON.parse(decodeURIComponent(userDataString));
             console.log("search Params data",parsedUserData); 
+            
+
+        //Add data to the page
+        
+        if(parsedUserData && cvName && cvEmail && cvPhone && cvDP && cvAddress && cvDOB && cvSkills  && cvEducation && cvCources  && cvProjects){
+
+            
+            cvName.innerHTML = parsedUserData.name 
+            cvEmail.innerHTML = parsedUserData.email 
+            cvPhone.innerHTML = parsedUserData.phone 
+            cvDP.src = parsedUserData.image 
+            cvAddress.innerHTML = parsedUserData.address 
+            cvDOB.innerHTML = parsedUserData.DateOfBirth 
+            // Skill
+            parsedUserData.skill.forEach(val => {            
+                cvSkills.innerHTML +=
+                `<div>${val.skill} </div>`
+            })
+    
+            // Education
+            parsedUserData.Education.forEach(val =>{
+                cvEducation.innerHTML +=
+                `
+                 <h3>${val.degree} </h3>
+                 <i>${val.institute} </i>
+                 <p>Year of Completion:${val.YearOfPassing} </p>
+                `
+            })
+    
+            //Cources
+            parsedUserData.Cources
+            .forEach(val =>{
+                cvCources.innerHTML +=
+                `
+                 <h3>${val.degree} </h3>
+                 <i>${val.institute} </i>
+                 <p>Year of Completion:${val.YearOfPassing} </p>
+                `
+            })
+    
+            //Projects
+            parsedUserData.Projects
+            .forEach(val =>{
+                cvProjects.innerHTML +=
+                `
+                 <li class="activities"><span>${val.projectName}  -- </span><span>${val.description} </span></li>
+                `
+            })
+    
+            // editToggle && editToggle.classList.toggle("hide")
+            // downloadBtn && downloadBtn.classList.toggle("hide")
+            // shareBtn && shareBtn.classList.toggle("hide")
+    
+    
+        }
           }
     
     };
