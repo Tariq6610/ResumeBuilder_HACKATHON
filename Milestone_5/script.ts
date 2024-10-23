@@ -560,7 +560,7 @@ downloadBtn && downloadBtn.addEventListener("click",()=>{
 
     shareBtn && shareBtn.addEventListener("click", async () => {
         // Define the base URL
-        const url = `https://vercel.live/link/resume-builder-hackathon-v2bc-upto-milestone-5.vercel.app?via=project-dashboard-alias-list&p=1&page=/?`;
+        const url = `https://resume-builder-hackathon-v2bc-upto-milestone-5.vercel.app/?`;
         
         // Get the user data from sessionStorage
         const userdata = sessionStorage.getItem("user");
@@ -588,6 +588,7 @@ downloadBtn && downloadBtn.addEventListener("click",()=>{
         btnWrap && btnWrap.classList.toggle("hide")
         form && form.classList.toggle("hide")
         heading && heading.classList.toggle("hide")
+        sessionStorage.clear();
         
     });
 
