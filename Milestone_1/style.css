@@ -140,6 +140,9 @@ button{
 
 
 @media (max-width: 950px) {
+    .firstInnerCont h1{
+        font-size: 55px;
+    }
     .firstInnerCont{
         justify-content: start;
    
@@ -171,5 +174,30 @@ button{
     }
     .proj{
         max-width: 400px;
+    }
+}
+
+@media (max-width : 600px) {
+    .firstInnerCont h1{
+        font-size: 50px;
+    }
+    .eduWraper{
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+    }
+    .techWraper{
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+    }
+
+    .projWraper{
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+    }
+    .proj{
+        width: 100%;
     }
 }
