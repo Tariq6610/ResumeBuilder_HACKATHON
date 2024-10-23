@@ -164,6 +164,9 @@ a{
 }
 
 @media (max-width: 950px) {
+    .firstInnerCont h1{
+        font-size: 55px;
+    }
     .firstInnerCont{
         justify-content: start;
    
@@ -199,6 +202,9 @@ a{
 }
 
 @media (max-width : 600px) {
+    .firstInnerCont h1{
+        font-size: 50px;
+    }
     .eduWraper{
         display: flex;
         flex-direction: column;
