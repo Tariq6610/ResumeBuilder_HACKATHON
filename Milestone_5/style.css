@@ -198,6 +198,28 @@ a{
     }
 }
 
+@media (max-width : 600px) {
+    .eduWraper{
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+    }
+    .techWraper{
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+    }
+
+    .projWraper{
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+    }
+    .proj{
+        width: 100%;
+    }
+}
+
 .edit{
     cursor: pointer;
     background-color: #6439FF;
