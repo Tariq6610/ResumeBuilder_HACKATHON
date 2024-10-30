@@ -423,7 +423,7 @@ function getData(){
             <div>TypeScript</div>
             <div>React</div>
             <div>Next Js</div>
-            <div>Fiebase</div>
+            <div>Firebase</div>
             <div>Bootstrap</div>
             <div>Tailwind</div>
         </div>

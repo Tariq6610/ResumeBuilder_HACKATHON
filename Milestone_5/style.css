@@ -152,7 +152,10 @@ a{
     justify-content: space-between;
     max-width: 1000px;
     margin: 0 auto;
+    align-items: center;
 }
+
+
 
 #clear{
     padding: 8px 17px;
@@ -223,6 +226,11 @@ a{
     }
     .proj{
         width: 100%;
+    }
+    .btnWrap div{
+       display: flex;
+       flex-direction: column;
+       gap: 10px;
     }
 }
 
