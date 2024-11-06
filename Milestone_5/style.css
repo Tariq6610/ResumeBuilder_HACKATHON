@@ -79,6 +79,11 @@ button{
     padding: 5px 11px;
     background-color: grey;
     border-radius: 15px;
+    color: white;
+}
+
+.skillH{
+    margin-bottom: 20px;
 }
 
 
@@ -172,32 +177,43 @@ a{
     }
     .firstInnerCont{
         justify-content: start;
+        width: 70%;
+        margin-inline: auto;
    
     }
+
+    .skills{
+        width: 70%;
+        margin-inline:auto;
+    }
+
+    .skillH{
+        width: 70%;
+        margin-inline: auto;
+    }
+
     
     .secondInnerCont{
-        display: block;
+        display: flex;
+       justify-content: center;
     }
 
     .secondInnerCont .col1, .col2{
-        width: 100%;
+        width: 70%;
     }
 
     .eduWraper{
         display: flex;
         flex-direction: column;
-        align-items: end;
     }
     .techWraper{
         display: flex;
         flex-direction: column;
-        align-items: start;
     }
 
     .projWraper{
         display: flex;
         flex-direction: column;
-        align-items: end;
     }
     .proj{
         max-width: 400px;
@@ -208,31 +224,24 @@ a{
     .firstInnerCont h1{
         font-size: 50px;
     }
-    .eduWraper{
-        display: flex;
-        flex-direction: column;
-        align-items: start;
-    }
-    .techWraper{
-        display: flex;
-        flex-direction: column;
-        align-items: start;
+
+    .firstInnerCont{
+        justify-content: start;
+        width: 100%;
+        margin-inline: auto;
+   
     }
 
-    .projWraper{
-        display: flex;
-        flex-direction: column;
-        align-items: start;
+    .skillH{
+        width: 100%;
+        margin-inline: auto;
     }
-    .proj{
+
+    .secondInnerCont .col1, .col2{
         width: 100%;
     }
-    .btnWrap div{
-       display: flex;
-       flex-direction: column;
-       gap: 10px;
-    }
 }
+
 
 .edit{
     cursor: pointer;

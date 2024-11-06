@@ -191,6 +191,20 @@ user.DateOfBirth = DOB.value;
 user.email = email.value;
 
 
+//check if all the fields are filled
+const isFilled = (user : User)=>{
+    return Object.values(user).every((value)=>{
+        if(Array.isArray(value)){
+            return value.length > 0 && value.every((val) => {
+                // Recursively check if each object in the array is fully filled
+            return Object.values(val).every((field) => field !== "" && field !== undefined);
+            })
+        }
+        return value !== "" && value !== undefined;
+    })
+}
+
+
 // add image to the object
 
 const inputfile = document.getElementById("image") as HTMLInputElement | null;
@@ -206,9 +220,17 @@ if(inputfile && inputfile.files){
          user.image = base64Image
 
     // user object is stored in session storage here, 
-    sessionStorage.setItem('user', JSON.stringify(user));
+    if(isFilled(user)){
+        sessionStorage.setItem('user', JSON.stringify(user));
+    }else{
+        alert("Field is missing, Please fill all the fields")
     }
-    reader.readAsDataURL(file);
+    }
+    if(file){
+        reader.readAsDataURL(file);
+    }else{
+        alert("Please Provide the image")
+    }
 }
 
 
@@ -403,7 +425,7 @@ function getData(){
                <p><i class="fa-solid fa-circle-info"></i><span style="margin-inline: 20px;">Objective</span><p style="margin: -5px 0px 0px 50px;">A detail-oriented and innovative programmer.  skilled in languages such as JavaScript, TypeScript. Passionate about solving complex problems and creating efficient, scalable code for both front-end and back-end systems. Seeking an opportunity to contribute to a dynamic development team and utilize my expertise</p></p> 
             </div>
         </div>
-        <h1>Skills</h1>
+        <h1 class="skillH">Skills</h1>
         <div class="skills">
             <div>HTML</div>
             <div>CSS</div>

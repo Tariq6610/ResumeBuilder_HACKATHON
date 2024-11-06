@@ -1,6 +1,5 @@
 const toggleBtn = document.getElementById("toggleBtn");
 const container = document.querySelector(".container")
-
 const Name = document.getElementById("name") as HTMLInputElement
 const email = document.getElementById("email") as HTMLInputElement
 const phone = document.getElementById("phone") as HTMLInputElement
@@ -8,8 +7,13 @@ const address = document.getElementById("address") as HTMLInputElement
 const DOB = document.getElementById("DOB") as HTMLInputElement
 const bio = document.querySelector(".bio") as HTMLDivElement
 const cv = document.querySelector(".cv") as HTMLDivElement
-const form = document.querySelector(".form") as HTMLDivElement
+const form = document.querySelector(".formContainer") as HTMLDivElement
 const addBtn = document.getElementById("addBtn") as HTMLButtonElement
+const editToggle = document.getElementById("edittoggle") as HTMLButtonElement;
+const downloadBtn = document.getElementById("downloadBtn") as HTMLButtonElement
+const shareBtn = document.getElementById("shareBtn") as HTMLButtonElement
+const btnWrap = document.querySelector(".btnWrap") as HTMLDivElement
+const heading = document.querySelector(".TemplateHeading") as HTMLDivElement
 
 
 
@@ -35,7 +39,7 @@ function makeCv(){
   if (bio) {
     bio.innerHTML = `
                         <h1>${Name.value}</h1>
-                <p><i  class="fa-solid fa-square-envelope"></i><span style="margin-inline: 20px;">Email</span><span>${email.value}</span></p>
+                <p><i  class="fa-solid fa-square-envelope"></i><span style="margin-inline: 20px;">Email</span><span>${email.value} <i class="fa-solid fa-pencil"></i></span></p>
 
                 <p><i class="fa-solid fa-square-phone"></i><span style="margin-inline: 20px;">Phone</span><span>${phone.value}</span></p>
 
@@ -191,6 +195,21 @@ user.DateOfBirth = DOB.value;
 user.email = email.value;
 
 
+
+//check if all the fields are filled
+const isFilled = (user : User)=>{
+    return Object.values(user).every((value)=>{
+        if(Array.isArray(value)){
+            return value.length > 0 && value.every((val) => {
+                // Recursively check if each object in the array is fully filled
+            return Object.values(val).every((field) => field !== "" && field !== undefined);
+            })
+        }
+        return value !== "" && value !== undefined;
+    })
+}
+
+
 // add image to the object
 
 const inputfile = document.getElementById("image") as HTMLInputElement | null;
@@ -205,10 +224,20 @@ if(inputfile && inputfile.files){
       if(base64Image)
          user.image = base64Image
 
-    // user object is stored in session storage here, so that  The user.image property is  set once the FileReader finishes reading the image
-    sessionStorage.setItem('user', JSON.stringify(user));
+    // user object is stored in session storage here, 
+    console.log(user);
+
+        if(isFilled(user)){
+            sessionStorage.setItem('user', JSON.stringify(user));
+        }else{
+            alert("Field is missing, Please fill all the fields")
+        }
     }
-    reader.readAsDataURL(file);
+    if(file){
+        reader.readAsDataURL(file);
+    }else{
+        alert("Please Provide the image")
+    }
 }
 
 
@@ -308,7 +337,7 @@ skillsGroup.forEach(group =>{
 
 user.skill = skills;
 
-console.log(user);
+
 
 
 }
@@ -320,44 +349,50 @@ addBtn.addEventListener("click",()=>{
     location.reload(); 
 })
 
-function getData(){
-    const cvName = document.getElementById("cvName") as HTMLHeadingElement | null;
-    const cvEmail = document.getElementById("cvEmail") as HTMLSpanElement | null ;
-    const cvPhone = document.getElementById("cvPhone") as HTMLSpanElement | null ;
-    const cvDP = document.getElementById("cvDP") as HTMLImageElement | null ;
-    const cvAddress = document.getElementById("cvAddress") as HTMLSpanElement | null ;
-    const cvDOB = document.getElementById("cvDOB") as HTMLSpanElement | null ;
-    const cvSkills = document.querySelector(".skills") as HTMLDivElement | null;
-    const cvEducation = document.querySelector(".education") as HTMLDivElement | null;
-    const cvCources = document.querySelector(".cvCources") as HTMLDivElement | null;
-    const cvProjects = document.querySelector(".cvProjects") as HTMLUListElement | null;
+const cvName = document.getElementById("cvName") as HTMLHeadingElement | null;
+const cvEmail = document.getElementById("cvEmail") as HTMLSpanElement | null ;
+const cvPhone = document.getElementById("cvPhone") as HTMLSpanElement | null ;
+const cvDP = document.getElementById("cvDP") as HTMLImageElement | null ;
+const cvAddress = document.getElementById("cvAddress") as HTMLSpanElement | null ;
+const cvDOB = document.getElementById("cvDOB") as HTMLSpanElement | null ;
+const cvSkills = document.querySelector(".skills") as HTMLDivElement | null;
+const cvEducation = document.querySelector(".education") as HTMLDivElement | null;
+const cvCources = document.querySelector(".cvCources") as HTMLDivElement | null;
+const cvProjects = document.querySelector(".cvProjects") as HTMLUListElement | null;
+
+// Parse the current URL's query string
+const searchParams = new URLSearchParams(window.location.search);
     
+ // Retrieve the 'user' query parameter, which is a JSON string
+const userDataString = searchParams && searchParams.get('user');
+
+function getData(){
     
     const userdata = sessionStorage.getItem("user")
-    if(userdata && cvName && cvEmail && cvPhone && cvDP && cvAddress && cvDOB && cvSkills  && cvEducation && cvCources  && cvProjects){
+    if(!userDataString && userdata && cvName && cvEmail && cvPhone && cvDP && cvAddress && cvDOB && cvSkills  && cvEducation && cvCources  && cvProjects){
         const data = JSON.parse(userdata);
         console.log("session storage--->",data);
         
-        cvName.innerText = data.name;
-        cvEmail.innerText = data.email;
-        cvPhone.innerText = data.phone;
-        cvDP.src = data.image;
-        cvAddress.innerText = data.address;
-        cvDOB.innerText = data.DateOfBirth;
+        cvName.innerHTML = data.name + `<span><i class="fa-regular fa-pen-to-square edit hide "  style="font-size: 20px;" onClick="edit(this)"></i></span>`;
+        cvEmail.innerHTML = data.email + `<span><i class="fa-regular fa-pen-to-square edit hide "  style="font-size: 20px;" onClick="edit(this)"></i></span>`;
+        cvPhone.innerHTML = data.phone + `<span><i class="fa-regular fa-pen-to-square edit hide "  style="font-size: 20px;" onClick="edit(this)"></i></span>`;
+        cvDP.src = data.image 
+        cvAddress.innerHTML = data.address + `<span><i class="fa-regular fa-pen-to-square edit hide "  style="font-size: 20px;" onClick="edit(this)"></i></span>`;
+        cvDOB.innerHTML = data.DateOfBirth + `<span><i class="fa-regular fa-pen-to-square edit hide "  style="font-size: 20px;"></i></span>`;
 
         // Skill
         data.skill.forEach(val => {            
             cvSkills.innerHTML +=
-            `<div>${val.skill}</div>`
+            `<div>${val.skill} <span><i class="fa-regular fa-pen-to-square edit hide "  style="font-size: 20px;" onClick="edit(this)"></i></span></div>`
         })
 
         // Education
         data.Education.forEach(val =>{
             cvEducation.innerHTML +=
             `
-             <h3>${val.degree}</h3>
-             <i>${val.institute}</i>
-             <p>Year of Completion:${val.YearOfPassing}</p>
+             <h3>${val.degree} <span><i class="fa-regular fa-pen-to-square edit hide "  style="font-size: 20px;" onClick="edit(this)"></i></span></h3>
+             <i>${val.institute} <span><i class="fa-regular fa-pen-to-square edit hide "  style="font-size: 20px;" onClick="edit(this)"></i></span></i>
+             <p>Year of Completion:${val.YearOfPassing} <i class="fa-regular fa-pen-to-square edit hide"  style="font-size: 20px;" onClick="edit(this)"></i></p>
             `
         })
 
@@ -366,9 +401,9 @@ function getData(){
         .forEach(val =>{
             cvCources.innerHTML +=
             `
-             <h3>${val.degree}</h3>
-             <i>${val.institute}</i>
-             <p>Year of Completion:${val.YearOfPassing}</p>
+             <h3>${val.degree} <span><i class="fa-regular fa-pen-to-square edit hide "  style="font-size: 20px;" onClick="edit(this)"></i></span></h3>
+             <i>${val.institute} <span><i class="fa-regular fa-pen-to-square edit hide "  style="font-size: 20px;" onClick="edit(this)"></i></span></i>
+             <p>Year of Completion:${val.YearOfPassing} <span><i class="fa-regular fa-pen-to-square edit hide"  style="font-size: 20px;" onClick="edit(this)"></i></span></p>
             `
         })
 
@@ -377,15 +412,18 @@ function getData(){
         .forEach(val =>{
             cvProjects.innerHTML +=
             `
-             <li class="activities"><span>${val.projectName} -- </span>${val.description}</li>
+             <li class="activities"><span>${val.projectName} <span><i class="fa-regular fa-pen-to-square edit hide"  style="font-size: 20px;" onClick="edit(this)"></i></span> -- </span><span>${val.description} <span><i class="fa-regular fa-pen-to-square edit hide "  style="font-size: 20px;" onClick="edit(this)"></i></span></span></li>
             `
         })
 
+        editToggle && editToggle.classList.toggle("hide")
+        downloadBtn && downloadBtn.classList.toggle("hide")
+        shareBtn && shareBtn.classList.toggle("hide")
 
 
-    }else{
+    }else if(!userdata && !userDataString){
         cv.innerHTML = `
-                    <div class="firstInnerCont"> 
+            <div class="firstInnerCont"> 
             <div class="img">
                 <img src="./img.jpg" id="cvDP" alt="image">
             </div>
@@ -402,7 +440,7 @@ function getData(){
                <p><i class="fa-solid fa-circle-info"></i><span style="margin-inline: 20px;">Objective</span><p style="margin: -5px 0px 0px 50px;">A detail-oriented and innovative programmer.  skilled in languages such as JavaScript, TypeScript. Passionate about solving complex problems and creating efficient, scalable code for both front-end and back-end systems. Seeking an opportunity to contribute to a dynamic development team and utilize my expertise</p></p> 
             </div>
         </div>
-        <h1>Skills</h1>
+        <h1 class="skillH">Skills</h1>
         <div class="skills">
             <div>HTML</div>
             <div>CSS</div>
@@ -410,7 +448,7 @@ function getData(){
             <div>TypeScript</div>
             <div>React</div>
             <div>Next Js</div>
-            <div>Fiebase</div>
+            <div>Firebase</div>
             <div>Bootstrap</div>
             <div>Tailwind</div>
         </div>
@@ -497,5 +535,3 @@ clear && clear.addEventListener("click",()=>{
     sessionStorage.clear()
     location.reload();
 })
-
-// 
